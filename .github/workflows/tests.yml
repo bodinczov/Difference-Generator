@@ -30,7 +30,7 @@ jobs:
     - name: Upload coverage to CodeClimate
       run: |
         npm install -g codeclimate-test-reporter
-        ./cc-test-reporter after-build --exit-code $?
+        ./node_modules/.bin/codeclimate-test-reporter after-build --input-format lcov --lcov ./coverage/lcov.info
 
       env:
         TEST_REPORTER_ID: ${{ secrets.TEST_REPORTER_ID }}
