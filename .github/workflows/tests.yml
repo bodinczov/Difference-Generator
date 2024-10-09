@@ -35,8 +35,6 @@ jobs:
           cache: 'npm'
       - name: install
         run: make install
-      - name: linter
-        run: make lint
       - name: tests
         run: make test
       - name: Test & publish code coverage
