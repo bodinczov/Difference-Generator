@@ -1,8 +1,14 @@
+install-deps:
+	npm ci
+
+test:
+	npm test
+
+test-coverage:
+	npm test -- --coverage --coverageProvider=v8
+
 lint:
 	npx eslint .
 
-test:
-	npm run test
-
-install:
-	npm ci
+publish:
+	npm publish --dry-run
