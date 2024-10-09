@@ -1,6 +1,7 @@
 #!/usr/bin/env node
-import { Command } from "commander";
-import parser from "../src/parser.js";
+import { Command } from 'commander';
+import parser from '../src/parser.js';
+import compare from '../src/compare.js';
 
 const program = new Command();
 
@@ -14,12 +15,12 @@ program
     const parsedFile1 = parser(filepath1);
     const parsedFile2 = parser(filepath2);
     if (parsedFile1 && parsedFile2) {
-      console.log(`File 1: ${parsedFile1}`);
-      console.log(`File 2: ${parsedFile2}`);
+      const diff = compare(parsedFile1, parsedFile2);
+      console.log(diff);
     }
     if (option.format) {
-      console.log(`Output format: ${options.format}`);
+      console.log(`Output format: ${option.format}`);
     }
-  })
+  });
 
 program.parse(process.argv);
