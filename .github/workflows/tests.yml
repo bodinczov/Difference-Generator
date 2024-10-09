@@ -1,36 +1,15 @@
-name: tests
-
-on:
-  push:
-    branches:
-      - main
-  pull_request:
-    branches:
-      - main
-
+name: compare-check
+on: push
 jobs:
-  test:
+  build:
     runs-on: ubuntu-latest
-
     steps:
-    - name: Checkout code
-      uses: actions/checkout@v4
+      - uses: actions/checkout@v3
+      - run: make install
+      - run: make lint
+      - run: make test
 
-    - name: Set up Node.js
-      uses: actions/setup-node@v4
-      with:
-        node-version: '20'
-
-    - name: Install dependencies
-      run: npm ci
-
-    - name: Run tests with coverage
-      run: npm test -- --coverage
-
-    - name: Upload coverage to CodeClimate
-      run: |
-        npm install -g codeclimate-test-reporter
-        ./node_modules/.bin/codeclimate-test-reporter after-build --input-format lcov --lcov ./coverage/lcov.info
-
-      env:
-        TEST_REPORTER_ID: ${{ secrets.TEST_REPORTER_ID }}
+      - name: Test & publish code coverage
+        uses: bodinczov/codeclimate-action@v3.0.0
+        env:
+         CC_TEST_REPORTER_ID: ${{ secrets.CC_TEST_REPORTER_ID }}
