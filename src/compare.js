@@ -1,4 +1,3 @@
-// src/compare.js
 import _ from 'lodash';
 
 const compare = (data1, data2) => {
@@ -17,7 +16,7 @@ const compare = (data1, data2) => {
     return `    ${key}: ${data1[key]}`;
   });
 
-  return `{\n${diff.join('\n')}\n}`;
+  return `{\n${diff.filter(Boolean).join('\n')}\n}`;
 };
 
 export default compare;

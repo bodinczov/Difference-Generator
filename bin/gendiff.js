@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 import { Command } from 'commander';
-import parser from '../src/parser.js';
+import parser from '../src/parsers.js'; // Измените импорт
 import compare from '../src/compare.js';
 
 const program = new Command();
@@ -12,12 +12,15 @@ program
   .option('-f, --format [type]', 'output format')
   .helpOption('-h, --help', 'output usage information')
   .action((filepath1, filepath2, option) => {
-    const parsedFile1 = parser(filepath1);
-    const parsedFile2 = parser(filepath2);
-    if (parsedFile1 && parsedFile2) {
+    try {
+      const parsedFile1 = parser(filepath1);
+      const parsedFile2 = parser(filepath2);
       const diff = compare(parsedFile1, parsedFile2);
       console.log(diff);
+    } catch (error) {
+      console.error(error.message);
     }
+    
     if (option.format) {
       console.log(`Output format: ${option.format}`);
     }

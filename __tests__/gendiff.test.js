@@ -21,3 +21,18 @@ test('genDiff compares two JSON files correctly', () => {
   
   expect(diff).toBe(expectedDiff);
 });
+
+test('should compare two YAML files', () => {
+  const parsedFile1 = parser('__fixtures__/file1.yml');
+  const parsedFile2 = parser('__fixtures__/file2.yml');
+  const result = compare(parsedFile1, parsedFile2);
+
+  expect(result).toBe(`{
+  - follow: false
+    host: hexlet.io
+  - proxy: 123.234.53.22
+  - timeout: 50
+  + timeout: 20
+  + verbose: true
+}`);
+});
