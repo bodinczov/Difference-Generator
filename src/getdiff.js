@@ -1,7 +1,7 @@
 import _ from 'lodash';
 import path from 'path';
 import fs from 'fs';
-import parse from './parser.js';
+import parser from './parser.js';
 import ast from './formatters/index.js';
 
 const compare = (data1, data2,) => {
@@ -33,7 +33,7 @@ const compare = (data1, data2,) => {
 const getData = (filePath,) => {
   const fileContent = fs.readFileSync(filePath, 'utf-8',).trim();
   const fileExtName = path.extname(filePath,).slice(1,);
-  return parse(fileContent, fileExtName,);
+  return parser(fileContent, fileExtName,);
 };
 
 const getDiff = (file1, file2, format = 'stylish',) => ast(compare(getData(file1,), getData(file2,),), format,);
