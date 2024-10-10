@@ -1,38 +1,38 @@
+import { test, expect } from '@jest/globals';
 import path from 'path';
-import parser from '../src/parser.js';
-import compare from '../src/compare.js';
+import fs from 'fs';
+import { fileURLToPath } from 'url';
+import getDiff from '../src/getdiff.js';
 
-const file1Path = path.resolve('__fixtures__/file1.json');
-const file2Path = path.resolve('__fixtures__/file2.json');
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
+const getFixturePath = (filename) => path.join(__dirname, '..', '__fixtures__', filename);
 
-test('genDiff compares two JSON files correctly', () => {
-  const expectedDiff = `{
-  - follow: false
-    host: hexlet.io
-  - proxy: 123.234.53.22
-  - timeout: 50
-  + timeout: 20
-  + verbose: true
-}`;
+const resultExpected = (fileName) => fs.readFileSync(getFixturePath(fileName), 'utf-8').trim();
 
-  const parsedFile1 = parser(file1Path);
-  const parsedFile2 = parser(file2Path);
-  const diff = compare(parsedFile1, parsedFile2);
-  
-  expect(diff).toBe(expectedDiff);
-});
+test.each([
+  {
+    file1: 'file1.json', file2: 'file2.json', format: undefined, expected: 'stylishResExpected.txt',
+  },
+  {
+    file1: 'file1.json', file2: 'file2.json', format: 'plain', expected: 'plainResExpected.txt',
+  },
+  {
+    file1: 'file1.json', file2: 'file2.json', format: 'json', expected: 'jsonResExpected.txt',
+  },
+  {
+    file1: 'file1.yml', file2: 'file2.yml', format: undefined, expected: 'stylishResExpected.txt',
+  },
+  {
+    file1: 'file1.yml', file2: 'file2.yml', format: 'plain', expected: 'plainResExpected.txt',
+  },
+  {
+    file1: 'file1.yml', file2: 'file2.yml', format: 'json', expected: 'jsonResExpected.txt',
+  },
 
-test('should compare two YAML files', () => {
-  const parsedFile1 = parser('__fixtures__/file1.yml');
-  const parsedFile2 = parser('__fixtures__/file2.yml');
-  const result = compare(parsedFile1, parsedFile2);
-
-  expect(result).toBe(`{
-  - follow: false
-    host: hexlet.io
-  - proxy: 123.234.53.22
-  - timeout: 50
-  + timeout: 20
-  + verbose: true
-}`);
+])('compare', ({
+  file1, file2, format, expected,
+}) => {
+  expect(getDiff(getFixturePath(file1), getFixturePath(file2), format))
+    .toBe(resultExpected(expected));
 });
