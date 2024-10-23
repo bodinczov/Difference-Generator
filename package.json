@@ -2,7 +2,7 @@
   "name": "@hexlet/code",
   "version": "1.0.0",
   "description": "Difference Generator is a CLI utility that compare two configuration files.",
-  "main": "bin/gendiff.js",
+  "main": "./src/gentiff.js",
   "bin": {
     "gendiff": "bin/gendiff.js"
   },
