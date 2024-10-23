@@ -1,7 +1,7 @@
 export default {
   testEnvironment: 'node',
   transform: {
-    '^.+\\.m?js$': 'babel-jest', 
+    '^.+\\.m?js$': 'babel-jest',
   },
-  coverageReporters: ['text', 'lcov',],
+  coverageReporters: ['text', 'lcov'],
 };
