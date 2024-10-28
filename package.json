@@ -1,5 +1,5 @@
 {
-  "name": "@hexlet/code",
+  "name": "difference-finder",
   "version": "1.0.0",
   "description": "Difference Generator is a CLI utility that compare two configuration files.",
   "main": "./src/getdiff.js",
@@ -10,7 +10,7 @@
     "test": "jest --coverage",
     "watch:test": "jest --watch"
   },
-  "author": "bodinczov",
+  "author": "spec01",
   "type": "module",
   "license": "ISC",
   "dependencies": {

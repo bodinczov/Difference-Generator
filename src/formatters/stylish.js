@@ -9,7 +9,7 @@ const stringify = (data, depth) => {
 
 const stylish = (inputData) => {
   const inner = (data, depth) => {
-    const arr = data.map((item) => {
+    const treePart = data.map((item) => {
       const nextDepth = depth + 1;
       switch (item.type) {
         case 'added': return `${space(depth)}  + ${item.key}: ${stringify(item.value, nextDepth)}`;
@@ -20,7 +20,7 @@ const stylish = (inputData) => {
         default: throw new Error(`Unknown item type: '${item.type}'!`);
       }
     });
-    return arr.join('\n');
+    return treePart.join('\n');
   };
   return `{\n${inner(inputData, 0)}\n}`;
 };

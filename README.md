@@ -1,5 +1,4 @@
-### Hexlet tests and linter status:
-[![Actions Status](https://github.com/bodinczov/fullstack-javascript-project-46/actions/workflows/hexlet-check.yml/badge.svg)](https://github.com/bodinczov/fullstack-javascript-project-46/actions)
+### Tests and linter status:
 
 [![Maintainability](https://api.codeclimate.com/v1/badges/9109ee89fee785629829/maintainability)](https://codeclimate.com/github/bodinczov/fullstack-javascript-project-46/maintainability)
 
@@ -16,7 +15,7 @@
 To install locally, follow these steps:
 
 ```bash
-git clone https://github.com/yourusername/fullstack-javascript-project-46.git
+git clone git@github.com:bodinczov/Difference-Generator.git
 cd fullstack-javascript-project-46
 npm install
 npm link
